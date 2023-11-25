@@ -21,25 +21,6 @@ const createUser = async (req: Request, res: Response) => {
   }
 };
 
-// const retrieveUserList = (req: Request, res: Response) => {
-//   try {
-//     const result = UserServices.RetrieveUsersFromDB;
-
-//     res.status(200).json({
-//       success: true,
-//       message: 'User retrieved successfully',
-//       data: result,
-//     });
-//   } catch (error) {
-//     res.status(404).json({
-//       success: false,
-//       message: 'wrong',
-//       error,
-//     });
-//   }
-// };
-
-// Here logic problem like when i setup another file then i cannot get any data from these logic
 
 const retrieveUserList = async (req: Request, res: Response) => {
   try {
