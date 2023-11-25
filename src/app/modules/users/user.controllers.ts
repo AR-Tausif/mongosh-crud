@@ -252,14 +252,14 @@ const addOrder = async (req: Request, res: Response) => {
 const getOrders = async (req: Request, res: Response) => {
   const { usersId } = req.params;
   try {
-    const userOrdrs = UserModel.findById(usersId);
+    const userOrdrs = await UserModel.findOne({ usersId }, 'orders');
     res.status(200).json({
       success: true,
       message: 'User orders retrieved succssfully',
       data: userOrdrs,
     });
   } catch (error) {
-    res.status(400).json({
+    res.status(200).json({
       success: false,
       message: 'Oppps, User no found...',
       error,
