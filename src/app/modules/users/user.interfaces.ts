@@ -23,14 +23,10 @@ export interface UserData {
     },
   ];
 }
-export interface Orders {
-  orders: [
-    {
-      productName: string;
-      price: number;
-      quantity: number;
-    },
-  ];
+interface Order {
+  productName: string;
+  price: number;
+  quantity: number;
 }
 
 interface FullName {
@@ -54,4 +50,5 @@ export interface User {
   isActive: boolean;
   hobbies: string[];
   address: Address;
+  orders?: Order[];
 }

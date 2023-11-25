@@ -20,6 +20,7 @@ const userSchema: Schema<User> = new Schema({
     city: { type: String, required: true },
     country: { type: String, required: true },
   },
+  orders: [{ productName: String, price: Number, quantity: Number }],
 });
 
 export const UserModel = model<User>('User', userSchema);
