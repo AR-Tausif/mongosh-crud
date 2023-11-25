@@ -1,16 +1,17 @@
-import express, { Application, Request, Response } from 'express';
-import cors from 'cors';
-import { StudentRoute } from './app/modules/users/user.routes';
-const app: Application = express();
+import express, { Application } from 'express'
+import cors from 'cors'
+import { UserRoutes } from './app/modules/user/user.route'
 
-// parser using here
-app.use(express.json());
-app.use(cors());
+const app: Application = express()
 
-// Application routes here
-app.use('/api/users', StudentRoute);
-app.get('/', (req: Request, res: Response) => {
-  res.send('hello work');
-});
+// parsers
+app.use(express.json())
+app.use(cors())
 
-export default app;
+app.get('/', (req, res) => {
+  res.send('Server is running!')
+})
+
+app.use('/api/users', UserRoutes)
+
+export default app
