@@ -12,7 +12,7 @@ Before you begin, ensure you have met the following requirements:
 1. **Clone the repository:**
 
    ```bash
-   https://github.com/NahidAhmed47/L2-assignment02.git
+   https://github.com/AR-Tausif/mongosh-crud.git
    cd L2-assignment02
    ```
 
