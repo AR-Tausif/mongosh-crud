@@ -266,6 +266,50 @@ const getOrders = async (req: Request, res: Response) => {
     });
   }
 };
+
+const getTotalPrice = async (req: Request, res: Response) => {
+  try {
+    const userId = parseInt(req.params.userId);
+    const totalPriceResult = await UserModel.aggregate([
+      //Stage-1 for query one data
+      { $match: { userId: userId } },
+      //Stage-2 for separated data from orders array
+      { $unwind: '$orders' },
+      //Stage-3
+      {
+        $group: {
+          _id: null,
+          totalPrice: {
+            $sum: { $multiply: ['$orders.price', '$orders.quantity'] },
+          },
+        },
+      },
+      { $project: { _id: 0, totalPrice: 1 } },
+    ]);
+
+    if (totalPriceResult.length === 0) {
+      res.status(404).json({
+        success: false,
+        message: 'OPPS, user not found',
+        error: {
+          code: 404,
+          description: 'User not found!',
+        },
+      });
+    }
+    res.status(200).json({
+      success: true,
+      message: 'Total price calculated successfully!',
+      data: totalPriceResult,
+    });
+  } catch (error) {
+    res.status(200).json({
+      success: false,
+      message: 'Something went wrong...',
+      error,
+    });
+  }
+};
 export const UserControllers = {
   createUser,
   retrieveUserList,
@@ -274,4 +318,5 @@ export const UserControllers = {
   deleteUser,
   addOrder,
   getOrders,
+  getTotalPrice,
 };
